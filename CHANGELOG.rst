@@ -2,6 +2,11 @@
 Changelog for package moveit_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.7.2 (2026-08-14)
+------------------
+* Add smoothness_level for FREE path Pilz command (`#190 <https://github.com/ros-planning/moveit_msgs/issues/190>`_)
+* Contributors: AimanHaidar
+
 2.7.1 (2025-07-15)
 ------------------
 * Address 2.7.0 release issues via re-release as 2.7.1
@@ -194,7 +199,7 @@ Changelog for package moveit_msgs
 
 0.8.1 (2016-06-15)
 ------------------
-* [feat] add new srv ApplyPlanningScene `#21 <https://github.com/ros-planning/moveit_msgs/issues/21>`_  
+* [feat] add new srv ApplyPlanningScene `#21 <https://github.com/ros-planning/moveit_msgs/issues/21>`_
   This service takes a PlanningScene message and applies it to the monitored scene. Ideally it should include a `bool success` field, but it is not possible to apply the scene and check for success without ABI changes, so leave it out for now. To get this change pushed to indigo.
 * [feat] apply_planning_scene: add a success field in response
   This will be set to true in indigo, but might return false in kinetic and upcoming after we broke the underlying API to get that information.
