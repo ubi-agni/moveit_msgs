@@ -2,6 +2,11 @@
 Changelog for package moveit_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.2.3 (2026-09-01)
+------------------
+* Add GetMultiStateValidity service (`#186 <https://github.com/ros-planning/moveit_msgs/issues/186>`_)
+* Contributors: Lucian James
+
 2.2.2 (2023-05-12)
 ------------------
 * Remove disclaimer from CollisionObject pose (`#126 <https://github.com/ros-planning/moveit_msgs/issues/126>`_)
@@ -106,7 +111,7 @@ Changelog for package moveit_msgs
 
 0.8.1 (2016-06-15)
 ------------------
-* [feat] add new srv ApplyPlanningScene `#21 <https://github.com/ros-planning/moveit_msgs/issues/21>`_  
+* [feat] add new srv ApplyPlanningScene `#21 <https://github.com/ros-planning/moveit_msgs/issues/21>`_
   This service takes a PlanningScene message and applies it to the monitored scene. Ideally it should include a `bool success` field, but it is not possible to apply the scene and check for success without ABI changes, so leave it out for now. To get this change pushed to indigo.
 * [feat] apply_planning_scene: add a success field in response
   This will be set to true in indigo, but might return false in kinetic and upcoming after we broke the underlying API to get that information.
