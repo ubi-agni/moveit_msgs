@@ -8,21 +8,15 @@ on:
   pull_request:
   push:
     branches:
-      - ros2
+      - humble
 
 jobs:
   industrial_ci:
     strategy:
       matrix:
         env:
-          - {ROS_DISTRO: foxy, ROS_REPO: main}
-          - {ROS_DISTRO: foxy, ROS_REPO: testing}
-          - {ROS_DISTRO: galactic, ROS_REPO: main}
-          - {ROS_DISTRO: galactic, ROS_REPO: testing}
           - {ROS_DISTRO: humble, ROS_REPO: main}
           - {ROS_DISTRO: humble, ROS_REPO: testing}
-          - {ROS_DISTRO: rolling, ROS_REPO: main}
-          - {ROS_DISTRO: rolling, ROS_REPO: testing}
 
     env:
       CCACHE_DIR: ${{ github.workspace }}/.ccache
@@ -34,19 +28,21 @@ jobs:
     name: ${{ matrix.env.ROS_DISTRO }}-${{ matrix.env.ROS_REPO }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v7
       - name: cache ccache
-        uses: pat-s/always-upload-cache@v2.1.5
+        uses: rhaschke/cache@main
         with:
           path: ${{ env.CCACHE_DIR }}
-          key: ccache-${{ env.CACHE_PREFIX }}-${{ github.sha }}  
+          key: ccache-${{ env.CACHE_PREFIX }}-${{ github.sha }}
           restore-keys: |
             ccache-${{ env.CACHE_PREFIX }}
+          env:
+            GHA_CACHE_SAVE=always
       - name: industrial_ci
         uses: 'ros-industrial/industrial_ci@master'
         env: ${{ matrix.env }}
       - name: upload test artifacts (on failure)
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v7
         if: failure()
         with:
           name: test-results
